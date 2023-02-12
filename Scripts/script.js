@@ -26,7 +26,7 @@ function selectFilter(e) {
     }
     e.target.classList.add("active-filter");
     ticketsContainer.innerHTML = "";
-    let filterClicked = e.target.classList[1];  // kis filter pe click hua hai wo milegi isse
+    let filterClicked = e.target.classList[1];  // kis filter pe click hua hai wo milega isse
     loadSelectedTickets(filterClicked);
   }
 }
@@ -116,15 +116,17 @@ agr selected nhi hua to return nhi krenge aur aage ka code chalega
 jisme jo selected hai uspe se selected-filter wali class hta dete hai 
 aur jispe click kiya hai uspe selected-filter wali class lga dete hai 
 */
+
 /*
 #2. closeTicketModal 
 
 agr ticketModalOpen true hai to use hum body se remove kr dete hai 
 aur ticketModalOpen ko false kr dete hai taki jab + pe click ho to us time hum return na kre 
 aur ticke modal attach ho.
-hum if condition isiliye lgayi hai kyunki agr ticketModalOpen false hoga to iska matlab body pe koi ticke modal ka div nhi hai 
+hum if condition isiliye lgayi hai kyunki agr ticketModalOpen false hoga to iska matlab body pe koi ticket modal ka div nhi hai 
 to null.remove() call hoga jab hum cross pe click krenge aur error aa jaayega
 */
+
 /*
 #3. 
 Hum chahte hai ki jaise hi koi key press ho to ticket-text div ke andar likha text `Enter Your Text !` ht jaaye
@@ -139,10 +141,12 @@ humne closeTicketModal me aur OpenTicketModal me isTextTyped ko false bnaya hua 
 matlab ki jaise hi current wala ticket ke modal ko close kiya jaaye ya fir nya ticket ka modal open ho to isTextTyped false hona chahiye
 taki uske liye bhi handleKeyPress fxn me 2nd if wali condition true ho ske ho uska text bhi key press krne pe khaali ho
 */
+
 /*
 #4. handleKeyPress function
-reder video with name HandleKeyPress function for explaination
+refer video with name HandleKeyPress function for explaination
 */
+
 /*
 #5. selectFilter()
 jo uper wala box hai filter ka uske hisab se ticketContainer me tickets show krta hai ye fxn
