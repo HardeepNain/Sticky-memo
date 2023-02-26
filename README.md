@@ -1,6 +1,6 @@
 # Sticky Memo <a href="https://stickymemo.netlify.app/" target="_blank"><img align="center" src="./Img-Icons/icons8-external-link-64.png" alt="live link" height="30" width="40" /></a>
 
-A web application that allows users to create, store, and manage digital "sticky notes" made using `HTML`, `CSS`, and `JavaScript`.
+A web application that allows users to create, store, and manage digital "sticky notes" built using `HTML`, `CSS`, and `JavaScript`.
 
 ## Demo &nbsp;<a href="https://youtu.be/ckkf7m72e_Q" target="_blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/youtube.svg" alt="Youtube" height="30" width="40" /></a>
 
