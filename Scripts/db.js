@@ -1,11 +1,10 @@
-let myDB = window.localStorage;  // ye hume local host ka local storage laakar deta hai #1
+let myDB = window.localStorage; // ye hume local host ka local storage laakar deta hai #1
 let ticketsContainer = document.querySelector(".tickets-container");
-let allFilterClasses = ["red" , "blue" , "green" , "yellow" , "black"];
+let allFilterClasses = ["red", "blue", "green", "yellow", "black"];
 
-
-function loadTickets() {  //[#3]
+function loadTickets() {//[#3]
   let allTickets = myDB.getItem("allTickets");
-  if(allTickets) {
+  if (allTickets) {
     allTickets = JSON.parse(allTickets);
     for (let i = 0; i < allTickets.length; i++) {
       let ticketInfoObject = allTickets[i];
@@ -13,41 +12,39 @@ function loadTickets() {  //[#3]
     }
   }
 }
-loadTickets(); // [#4]
+loadTickets(); //[#4]
 
 // ye fxn same loadTickets wale fxn ke jaisa hi hai bas hum isme appendTicket ko call lgane se pahle
 // condition lga dete hai ki agr jo filter aaya hai agr wo us ticket ke infoObject me pde filter se match ho rha hai
 // to hi appendTicket ko call lgao wrna mat lagao jisse sirf us filter wali ticket hi container pe append hongi
-function loadSelectedTickets(filter){
+function loadSelectedTickets(filter) {
   let allTickets = myDB.getItem("allTickets");
-  if(allTickets) {
+  if (allTickets) {
     allTickets = JSON.parse(allTickets);
     for (let i = 0; i < allTickets.length; i++) {
       let ticketInfoObject = allTickets[i];
-      if(ticketInfoObject.ticketFilter == filter){
+      if (ticketInfoObject.ticketFilter == filter) {
         appendTicket(ticketInfoObject);
       }
     }
   }
 }
 
-
-function saveTicketToDB(ticketInfoObject) {   //[#1]
-  let allTickets = myDB.getItem("allTickets");   // get item hume hamre storage me padi wo key laake deta hai jo key value(allTickets) humnepass ki ho
-  if (allTickets) {
-    // already all tickets are present
-    allTickets = JSON.parse(allTickets); 
+function saveTicketToDB(ticketInfoObject) {//[#2]
+  let allTickets = myDB.getItem("allTickets"); // get item hume hmare storage me padi wo key laake deta hai jo key value(allTickets) humne pass ki ho
+  if (allTickets) {// already all tickets are present
+    allTickets = JSON.parse(allTickets);
     allTickets.push(ticketInfoObject);
     myDB.setItem("allTickets", JSON.stringify(allTickets)); // setItem hmari key me value set karta hai isme hum do chije pass karte hai pehla argument key name(allTicket) aur dusra argument value(allTickets which contains tickets ka info object)
-  } else {                                                  // set item strings me value accept karta hai 
-    // no allTicket key found 
-    let allTickets = [ticketInfoObject];  
+  } else {                                                  // set item strings me value accept karta hai
+    // no allTicket key found
+    let allTickets = [ticketInfoObject];
     myDB.setItem("allTickets", JSON.stringify(allTickets)); // local Storage me key string ki form me store hoti hai thats why we stringify the obj.
   }
 }
 
-function appendTicket(ticketInfoObject) {   // [#5]
-  let { ticketFilter, ticketValue , ticketId } = ticketInfoObject;  // alag alag nikalne ki bjaye ek saath teeno object nikal diye
+function appendTicket(ticketInfoObject) {// [#5]
+  let { ticketFilter, ticketValue, ticketId } = ticketInfoObject; // alag alag nikalne ki bjaye ek saath teeno object nikal diye
   let ticketDiv = document.createElement("div");
   ticketDiv.classList.add("ticket");
   ticketDiv.innerHTML = `<div class="ticket-header ${ticketFilter}"></div>
@@ -60,52 +57,49 @@ function appendTicket(ticketInfoObject) {   // [#5]
     </div>`;
 
   // this is logic to switch ticket header color/filter on ui and db both
-    let ticketHeader = ticketDiv.querySelector(".ticket-header"); // ticketHeader pkd ke laaye
-  ticketHeader.addEventListener("click", function (e) {  // uspe click event lgaya
-      // logic to switch filter on ui
-      let currentFilter = e.target.classList[1]; //konsa filter abhi hai wo nikala e.g.black
-      let indexOfCurrFilter = allFilterClasses.indexOf(currentFilter); //black filter index nikal - 4
-      let newIndex = (indexOfCurrFilter + 1)%allFilterClasses.length; //kyunki uspe click hua to filter change hoga to jo nya filter hoga uska index - 0
-      let newFilter = allFilterClasses[newIndex]; //nya filter hoga - red
+  let ticketHeader = ticketDiv.querySelector(".ticket-header"); // ticketHeader pkd ke laaye
+  ticketHeader.addEventListener("click", function (e) {// uspe click event lgaya
 
-      ticketHeader.classList.remove(currentFilter); // remove black
-      ticketHeader.classList.add(newFilter); // add red
+    // logic to switch filter on ui
+    let currentFilter = e.target.classList[1]; //konsa filter abhi hai wo nikala e.g.black
+    let indexOfCurrFilter = allFilterClasses.indexOf(currentFilter); //black filter index nikal - 4
+    let newIndex = (indexOfCurrFilter + 1) % allFilterClasses.length; //kyunki uspe click hua to filter change hoga to jo nya filter hoga uska index - 0
+    let newFilter = allFilterClasses[newIndex]; //nya filter hoga - red
 
-      //logic to switch filter in db
-      let allTickets = JSON.parse(myDB.getItem("allTickets")); // get array of ticketInfoObjects
-      for(let i=0 ; i<allTickets.length ; i++){
-        if(allTickets[i].ticketId == ticketId){ // jis object ki ticketId jispe click hua hai uski ticketId se match hui 
-          allTickets[i].ticketFilter = newFilter; // usme object ke ticketFilter me newFilter daal denge
-        }
+    ticketHeader.classList.remove(currentFilter); // remove black
+    ticketHeader.classList.add(newFilter); // add red
+
+    //logic to switch filter in db
+    let allTickets = JSON.parse(myDB.getItem("allTickets")); // get array of ticketInfoObjects
+    for (let i = 0; i < allTickets.length; i++) {
+      if (allTickets[i].ticketId == ticketId) {// jis object ki ticketId jispe click hua hai uski ticketId se match hui
+        allTickets[i].ticketFilter = newFilter; // usme object ke ticketFilter me newFilter daal denge
       }
-      myDB.setItem("allTickets" , JSON.stringify(allTickets));  // db me dobara se set kr denge
-    })
+    }
+    myDB.setItem("allTickets", JSON.stringify(allTickets)); // db me dobara se set kr denge
+  });
 
-    let deleteTicketBtn = ticketDiv.querySelector(".ticket-delete");
-    
-    deleteTicketBtn.addEventListener("click" , function(e){ // attach event to delete btn 
-        ticketDiv.remove(); // ui se hata dega
-        deleteTicketFromDb(ticketId); // delete from the database
-    })
+  let deleteTicketBtn = ticketDiv.querySelector(".ticket-delete");
 
-  ticketsContainer.append(ticketDiv);  // last me ticket append ho jaayegi.
+  deleteTicketBtn.addEventListener("click", function (e) {// attach event to delete btn
+    ticketDiv.remove(); // ui se hata dega
+    deleteTicketFromDb(ticketId); // delete from the database
+  });
+
+  ticketsContainer.append(ticketDiv); // last me ticket append ho jaayegi.
 }
 
-
-function deleteTicketFromDb(ticketId){ // [#6]
-    let allTickets = JSON.parse(myDB.getItem("allTickets")); 
-    // [ {} , {} , {} , {} , {}  ]
-    let updatedTickets = allTickets.filter(  function(ticketObject){
-        if(ticketObject.ticketId == ticketId){    
-            return false;
-        }
-        return true;
-    });
-    myDB.setItem("allTickets" , JSON.stringify(updatedTickets));  // jab tickets filter ho jaayegi tab hum unko firse apne db me store kra dete hai
+function deleteTicketFromDb(ticketId) {// [#6]
+  let allTickets = JSON.parse(myDB.getItem("allTickets"));
+  // [ {} , {} , {} , {} , {}  ]
+  let updatedTickets = allTickets.filter(function (ticketObject) {
+    if (ticketObject.ticketId == ticketId) {
+      return false;
+    }
+    return true;
+  });
+  myDB.setItem("allTickets", JSON.stringify(updatedTickets)); // jab tickets filter ho jaayegi tab hum unko firse apne db me store kra dete hai
 }
-
-
-
 
 /*
 
@@ -127,7 +121,7 @@ aur firse allTickets array ko stringify krke 'allTickets' naam ki key se local s
 #3. loadTickets
 jaise hi files local host pe run hogi ye fxn ek ek karke jo tickets db me stored hai unko ui pe lagata jaayega
 'allTickets' key me pda stringified array humne allTickets var me save kr liya
-agr koi ticket nhi hogi to allTickets null hoga aur hum if me enternhi krengeaur koi bhi ticket append nhi hogi
+agr koi ticket nhi hogi to allTickets null hoga aur hum if me enter nhi krenge aur koi bhi ticket append nhi hogi
 agr koi tickets hogi to hum if me enter krenge jaha jaate hi hum sbse pahle allTickets ko parse kr lete hai
 fir allTickets pe ek loop maarte hai jo ek ek krke allTickets me se ticketInfoObject nikalega 
 aur append fxn ko call lga dega jo ui pe ticket append krta jaayega us ticketInfoObject ka use krke
