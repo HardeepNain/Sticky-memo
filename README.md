@@ -1,6 +1,6 @@
 # Sticky Memo <a href="https://stickymemo.netlify.app/" target="_blank"><img align="center" src="./Img-Icons/icons8-external-link-64.png" alt="live link" height="30" width="40" /></a>
 
-Sticky notes have been around for many years, and despite the increase in digital communications, they are still an important part of most offices and study areas. You can use sticky notes to help you organise yourself, your studies, your office and your household.
+A web application that allows users to create, store, and manage digital "sticky notes" made using `HTML`, `CSS`, and `JavaScript`.
 
 ## Demo &nbsp;<a href="https://youtu.be/ckkf7m72e_Q" target="_blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/youtube.svg" alt="Youtube" height="30" width="40" /></a>
 
@@ -9,13 +9,11 @@ https://user-images.githubusercontent.com/88960105/170753600-07389abc-3c39-4f95-
 
 ## Features 📝
 
-- It has a friendly and eye catching UI.
-- You can add or delete any ticket.
-- Can choose any header color while adding a sticky.
-- Can alter header color of added stickies.
-- Filter tickets on the basis of their header colors which prevent your notes to get muddle up.
-- Stickies get stored in your browser database and you can visit them anytime you want.
-- You can delete tickets using delete icon inside the sticky.
+- Simple to use interface so that you can create a new sticky note easily.
+- Users can customize the appearance of their sticky notes by choosing a header color when creating a new note or editing an existing one.
+- Sticky notes are stored in the user's `browser's local storage`, allowing them to be accessed and edited even after the browser is closed.
+- Users can easily delete sticky notes using the built-in delete icon located within each note.
+- The application features a filter function that allows users to sort or manage their sticky notes by their header color, preventing notes from getting lost or mixed up. User can divide his sticky notes mapping a specific color for specific type of tasks. 
 
 ## Tech Stack ⚒
 
